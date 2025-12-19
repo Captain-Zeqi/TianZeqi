@@ -553,3 +553,42 @@ input:focus, textarea:focus{
   transform: translateY(-1px);
   opacity: .95;
 }
+
+
+/* ===== Business Overview refinement ===== */
+.accordion{
+  gap: 14px;
+}
+
+.acc summary{
+  padding: 14px 14px;
+}
+
+.arrow-icon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+:root[data-theme="light"] .arrow-icon{
+  color: var(--primary);
+}
+
+.acc-title{
+  font-size: 15px;
+  letter-spacing: .2px;
+}
+
+.acc-body{
+  padding-left: 34px;
+  border-left: 2px solid rgba(124,58,237,.25);
+  margin-left: 6px;
+}
+
+:root[data-theme="light"] .acc-body{
+  border-left: 2px solid rgba(0,0,0,.18);
+}
