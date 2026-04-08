@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.lang = lang;
 
     document.querySelectorAll('[data-lang-zh], [data-lang-en]').forEach((el) => {
-      if (lang === 'zh-CN' && el.dataset.langZh) el.textContent = el.dataset.langZh;
-      if (lang === 'en' && el.dataset.langEn) el.textContent = el.dataset.langEn;
+      if (lang === 'zh-CN' && el.dataset.langZh) el.innerHTML = el.dataset.langZh;
+      if (lang === 'en' && el.dataset.langEn) el.innerHTML = el.dataset.langEn;
     });
 
     document.querySelectorAll('[data-lang-zh-placeholder], [data-lang-en-placeholder]').forEach((el) => {
@@ -91,16 +91,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- Active nav ----------
   function setActiveNavLink() {
     const scrollY = window.scrollY;
-    let current = '';
+    let current = sections.length ? sections[0].id : '';
 
     sections.forEach((section) => {
-      const top = section.offsetTop - 140;
+      const top = section.offsetTop - 160;
       const bottom = top + section.offsetHeight;
       if (scrollY >= top && scrollY < bottom) current = section.id;
     });
 
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 4) && sections.length) {
+      current = sections[sections.length - 1].id;
+    }
+
     allNavItems.forEach((item) => {
-      item.classList.toggle('active', item.getAttribute('href') === `#${current}`);
+      const isActive = item.getAttribute('href') === `#${current}`;
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-current', isActive ? 'page' : 'false');
     });
   }
 
@@ -117,7 +123,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init
   applyLanguage(currentLang);
+  applyAutoYears();
   setActiveNavLink();
+
+
+  // ---------- Auto years sync ----------
+  function applyAutoYears() {
+    const years = Math.max(new Date().getFullYear() - 2020, 0);
+
+    document.querySelectorAll('.auto-years-inline').forEach((el) => {
+      el.textContent = String(years);
+    });
+
+    document.querySelectorAll('.auto-years-plus').forEach((el) => {
+      el.textContent = `${years}+`;
+    });
+  }
 
   // ---------- WeChat image modal (floating window) ----------
   const wechatBtns = document.querySelectorAll('.wechat-btn');
