@@ -32,6 +32,20 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.philosophy-subtitle-en').forEach((el) => {
       el.textContent = (lang === 'zh-CN') ? (el.dataset.langEn || '') : '';
     });
+
+    applyCurrentYearText();
+    applyAutoYears();
+  }
+
+
+  function applyCurrentYearText() {
+    const currentYear = new Date().getFullYear();
+
+    document.querySelectorAll('.auto-current-year-text').forEach((el) => {
+      if (el.dataset.langZh) el.dataset.langZh = el.dataset.langZh.replace(/©\s*\d{4}/, `© ${currentYear}`);
+      if (el.dataset.langEn) el.dataset.langEn = el.dataset.langEn.replace(/©\s*\d{4}/, `© ${currentYear}`);
+      el.textContent = el.textContent.replace(/©\s*\d{4}/, `© ${currentYear}`);
+    });
   }
 
   langToggleBtn.addEventListener('click', () => {
@@ -123,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init
   applyLanguage(currentLang);
-  applyAutoYears();
   setActiveNavLink();
 
 
