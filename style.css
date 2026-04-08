@@ -599,7 +599,42 @@ input:focus, textarea:focus{
 
 
 
-/* ===== Contact social icons: dark mode purple ===== */
+/* ===== Links / Learn More ===== */
+.links-grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+}
+.link-card{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+  padding: 18px;
+  transition: transform .15s ease, border-color .15s ease;
+  text-decoration: none;
+}
+.link-card:hover{ transform: translateY(-2px); border-color: rgba(124,58,237,.45); }
+.link-favicon{
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+}
+:root[data-theme="light"] .link-favicon{ background: rgba(0,0,0,.03); }
+.link-info{ min-width: 0; }
+.link-name{ font-weight: 800; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.link-url{ font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+@media (max-width: 980px){
+  .links-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 560px){
+  .links-grid{ grid-template-columns: 1fr; }
+}
+
+
 :root:not([data-theme="light"]) .social-link img{
   /* Recolor monochrome SVG icons to violet (#7c3aed) in dark mode */
   filter: brightness(0) saturate(100%) invert(23%) sepia(88%) saturate(4554%) hue-rotate(257deg) brightness(98%) contrast(104%);
