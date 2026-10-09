@@ -353,6 +353,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.auto-years-plus').forEach((el) => {
       el.textContent = `${years}+`;
     });
+
+    const aiYears = Math.max(new Date().getFullYear() - 2024, 0);
+    document.querySelectorAll('.auto-years-ai').forEach((el) => {
+      el.textContent = String(aiYears);
+    });
   }
 
   // ---------- Modal controller (shared focus management) ----------

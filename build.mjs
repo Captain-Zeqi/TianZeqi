@@ -40,8 +40,13 @@ let html = read('index.html');
 // gives every crawler a complete sentence; the script still overwrites it on
 // load, so the page stays correct between builds and across new year.
 const experienceYears = Math.max(new Date().getFullYear() - 2020, 0);
+const aiExperienceYears = Math.max(new Date().getFullYear() - 2024, 0);
 
 html = html
+  .replace(
+    /(<span class="auto-years-ai">)[^<]*(<\/span>)/g,
+    '$1' + aiExperienceYears + '$2'
+  )
   .replace(
     /(<span class="auto-years-inline">)[^<]*(<\/span>)/g,
     '$1' + experienceYears + '$2'
